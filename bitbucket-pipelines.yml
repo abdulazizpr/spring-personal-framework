@@ -1,0 +1,11 @@
+image: maven:3.8.4-openjdk-17
+
+pipelines:
+  branches:
+    release/*:
+      - step:
+          name: Build Modules
+          caches:
+            - maven
+          script:
+            - mvn clean install -DskipTests
