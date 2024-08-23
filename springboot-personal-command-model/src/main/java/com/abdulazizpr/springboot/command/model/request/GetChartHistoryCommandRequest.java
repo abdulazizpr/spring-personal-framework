@@ -1,5 +1,6 @@
-package com.diginiq.bigboss.command.model.request;
+package com.abdulazizpr.springboot.command.model.request;
 
+import com.abdulazizpr.springboot.command.model.CommandRequest;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;

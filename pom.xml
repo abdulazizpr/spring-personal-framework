@@ -15,8 +15,9 @@
     <modules>
         <module>springboot-personal-entity</module>
         <module>springboot-personal-model</module>
-        <!--<module>bigboss-chart-model</module>
-        <module>bigboss-chart-utils</module>
+        <module>springboot-personal-utils</module>
+        <module>springboot-personal-command-model</module>
+        <!--
         <module>bigboss-chart-command-model</module>
         <module>bigboss-chart-command</module>
         <module>bigboss-chart-command-impl</module>

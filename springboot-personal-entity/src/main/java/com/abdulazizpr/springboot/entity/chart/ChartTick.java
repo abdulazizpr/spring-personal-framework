@@ -15,7 +15,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @Table(name = "chart_history", indexes = {
-        @Index(name = "idx_symbol", columnList = "symbol")
+        @Index(name = "idx_symbol", columnList = "symbol"),
+        @Index(name = "idx_datetime", columnList = "date_time")
 })
 public class ChartTick {
     @Id
