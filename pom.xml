@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.diginiq.bigboss</groupId>
-    <artifactId>bigboss-chart-service</artifactId>
+    <groupId>com.abdulazizpr.springboot</groupId>
+    <artifactId>springboot-personal-boilerplate</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -13,14 +13,15 @@
     </properties>
 
     <modules>
-        <module>bigboss-chart-entity</module>
-        <module>bigboss-chart-model</module>
+        <module>springboot-personal-entity</module>
+        <module>springboot-personal-model</module>
+        <!--<module>bigboss-chart-model</module>
         <module>bigboss-chart-utils</module>
         <module>bigboss-chart-command-model</module>
         <module>bigboss-chart-command</module>
         <module>bigboss-chart-command-impl</module>
         <module>bigboss-chart-command</module>
-        <module>bigboss-chart-application</module>
+        <module>bigboss-chart-application</module>-->
     </modules>
 
     <dependencyManagement>
@@ -37,9 +38,20 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-core</artifactId>
             <version>3.5.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

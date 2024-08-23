@@ -1,6 +1,5 @@
 package com.diginiq.bigboss.command.model.request;
 
-import com.diginiq.bigboss.utils.command.model.response.request.CommandRequest;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;

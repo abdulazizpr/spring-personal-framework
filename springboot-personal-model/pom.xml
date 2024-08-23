@@ -11,20 +11,7 @@
     </parent>
 
     <!--module name-->
-    <artifactId>springboot-personal-command-impl</artifactId>
-
-    <!--Load Dependencies from modulars/package-->
-    <dependencies>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+    <artifactId>springboot-personal-model</artifactId>
 
     <properties>
         <java.version>17</java.version>
