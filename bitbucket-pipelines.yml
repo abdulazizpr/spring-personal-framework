@@ -1,16 +1,25 @@
-image: maven:3.6.3
+image: maven:3.8.1-openjdk-17
 
 pipelines:
   default:
     - parallel:
       - step:
-          name: Build and Test
+          name: Build Dependencies
           caches:
             - maven
           script:
             - mvn clean install
           after-script:
               # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
+            - pipe: atlassian/checkstyle-report:0.3.0
+      - step:
+          name: Unit Test/Integration Test
+          caches:
+            - maven
+          script:
+            - mvn test
+          after-script:
+            # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
             - pipe: atlassian/checkstyle-report:0.3.0
       - step:
           name: Security Scan
