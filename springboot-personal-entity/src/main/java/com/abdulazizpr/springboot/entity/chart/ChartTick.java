@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -31,7 +32,7 @@ public class ChartTick {
 
     @Column(name = "date_time", nullable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateTime;
+    private LocalDateTime dateTime;
 
     @Column(name = "open", precision = 19, scale = 4, columnDefinition = "NUMERIC")
     private BigDecimal open;

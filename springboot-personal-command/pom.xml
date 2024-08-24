@@ -11,19 +11,24 @@
     </parent>
 
     <!--module name-->
-    <artifactId>springboot-personal-command-impl</artifactId>
+    <artifactId>springboot-personal-command</artifactId>
 
-    <!--Load Dependencies from modulars/package-->
     <dependencies>
         <dependency>
             <groupId>com.abdulazizpr.springboot</groupId>
-            <artifactId>springboot-personal-command</artifactId>
+            <artifactId>springboot-personal-utils</artifactId>
             <version>1.0.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.abdulazizpr.springboot</groupId>
-            <artifactId>springboot-personal-repository</artifactId>
+            <artifactId>springboot-personal-entity</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.abdulazizpr.springboot</groupId>
+            <artifactId>springboot-personal-command-model</artifactId>
             <version>1.0.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

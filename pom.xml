@@ -23,8 +23,11 @@
         <module>springboot-personal-utils</module>
         <module>springboot-personal-command-model</module>
         <module>springboot-personal-repository</module>
+        <module>springboot-personal-command</module>
+        <module>springboot-personal-command-impl</module>
+        <module>springboot-personal-controller</module>
         <module>springboot-personal-application</module>
-        <module>springboot-personal-migration</module> <!-- Tambahkan module migrasi jika diperlukan -->
+        <module>springboot-personal-migration</module>
     </modules>
 
     <dependencyManagement>
@@ -44,6 +47,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-core</artifactId>

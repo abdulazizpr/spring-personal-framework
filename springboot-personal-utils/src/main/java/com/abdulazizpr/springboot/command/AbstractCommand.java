@@ -13,8 +13,8 @@ import reactor.core.publisher.Mono;
 import java.util.Set;
 
 @SuppressWarnings("unchecked")
-public abstract class AbstractCommand<RESULT, REQUEST extends CommandRequest>
-        implements Command<Mono<Object>, REQUEST>, ApplicationContextAware, InitializingBean {
+public abstract class AbstractCommand<RESPONSE, REQUEST extends CommandRequest>
+        implements Command<RESPONSE, REQUEST>, ApplicationContextAware, InitializingBean {
 
     protected Validator validator;
 
@@ -31,7 +31,7 @@ public abstract class AbstractCommand<RESULT, REQUEST extends CommandRequest>
     }
 
     @Override
-    public final Mono<Object> execute(REQUEST request) {
+    public Mono<RESPONSE> execute(REQUEST request) {
         Set<ConstraintViolation<REQUEST>> constraintViolations = validator.validate(request);
         if (constraintViolations.isEmpty()) {
             return doExecute(request);
@@ -40,5 +40,5 @@ public abstract class AbstractCommand<RESULT, REQUEST extends CommandRequest>
         }
     }
 
-    public abstract Mono<Object> doExecute(REQUEST request);
+    public abstract Mono<RESPONSE> doExecute(REQUEST request);
 }

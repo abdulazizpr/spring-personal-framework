@@ -52,7 +52,7 @@ public class ChartTickDataRunner implements CommandLineRunner {
             ChartTick chartTick = new ChartTick(
                     UUID.randomUUID(),
                     SYMBOL,
-                    Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                    date.atStartOfDay(ZoneId.systemDefault()).toLocalDateTime(),
                     randomBigDecimal(),
                     randomBigDecimal(),
                     randomBigDecimal(),
