@@ -2,6 +2,7 @@ package com.abdulazizpr.springboot.entity.chart;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,12 +12,13 @@ import java.util.Date;
 import java.util.UUID;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "chart_history", indexes = {
+@Table(name = "chart_tick", indexes = {
         @Index(name = "idx_symbol", columnList = "symbol"),
-        @Index(name = "idx_datetime", columnList = "date_time")
+        @Index(name = "idx_dateTime", columnList = "date_time")
 })
 public class ChartTick {
     @Id
@@ -27,28 +29,28 @@ public class ChartTick {
     @Column(name = "symbol", nullable = false)
     private String symbol;
 
-    @Column(name = "date_time", nullable = false)
+    @Column(name = "date_time", nullable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateTime;
 
-    @Column(name = "open", precision = 19, scale = 4)
+    @Column(name = "open", precision = 19, scale = 4, columnDefinition = "NUMERIC")
     private BigDecimal open;
 
-    @Column(name = "high", precision = 19, scale = 4)
+    @Column(name = "high", precision = 19, scale = 4, columnDefinition = "NUMERIC")
     private BigDecimal high;
 
-    @Column(name = "low", precision = 19, scale = 4)
+    @Column(name = "low", precision = 19, scale = 4, columnDefinition = "NUMERIC")
     private BigDecimal low;
 
-    @Column(name = "close", precision = 19, scale = 4)
+    @Column(name = "close", precision = 19, scale = 4, columnDefinition = "NUMERIC")
     private BigDecimal close;
 
-    @Column(name = "tick_volume")
+    @Column(name = "tick_volume", columnDefinition = "NUMERIC")
     private BigInteger tickVolume;
 
-    @Column(name = "spread")
+    @Column(name = "spread", columnDefinition = "INTEGER")
     private int spread;
 
-    @Column(name = "volume")
+    @Column(name = "volume", columnDefinition = "NUMERIC")
     private BigInteger volume;
 }

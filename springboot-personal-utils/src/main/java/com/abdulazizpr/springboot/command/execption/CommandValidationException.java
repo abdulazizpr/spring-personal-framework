@@ -1,6 +1,7 @@
 package com.abdulazizpr.springboot.command.execption;
 
-import javax.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolation;
+
 import java.util.Set;
 
 public class CommandValidationException extends RuntimeException {

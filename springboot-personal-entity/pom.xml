@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://www.maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!--parent group-->
     <parent>
         <groupId>com.abdulazizpr.springboot</groupId>
         <artifactId>springboot-personal-boilerplate</artifactId>
@@ -11,7 +9,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <!--module name-->
     <artifactId>springboot-personal-entity</artifactId>
 
     <properties>
@@ -19,13 +16,11 @@
     </properties>
 
     <dependencies>
-        <!-- JPA Dependency -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- H2 Database Dependency for testing -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
