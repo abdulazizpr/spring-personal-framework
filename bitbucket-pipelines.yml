@@ -3,27 +3,17 @@ image: maven:3.8.1-openjdk-17
 pipelines:
   default:
     - step:
-        name: Build and Cache Dependencies
+        name: Build Dependencies and Migrate Database
         caches:
           - maven
         script:
-          - cd springboot-personal-entity
-          - mvn clean install
-          - cd ../springboot-personal-repository
-          - mvn clean install
-          - cd ..
+          - mvn clean install -DskipTests
+          - cd springboot-personal-migration/
+          - mvn flyway:migrate -P flyway
+
         after-script:
           # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
           - pipe: atlassian/checkstyle-report:0.3.0
-    - step:
-        name: Data Migration
-        caches:
-          - maven
-        services:
-          - postgres
-        script:
-          - cd springboot-personal-migration/
-          - mvn flyway:migrate -P flyway
     - step:
         name: Unit Test/Integration Test
         caches:
