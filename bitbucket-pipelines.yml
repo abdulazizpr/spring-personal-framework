@@ -12,20 +12,8 @@ pipelines:
           - mvn clean install -DskipTests
           - cd springboot-personal-migration/
           - mvn flyway:migrate -P flyway
-        after-script:
-          # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
-          - pipe: atlassian/checkstyle-report:0.3.0
-    - step:
-        name: Unit/Integration Testing
-        caches:
-          - maven
-        services:
-          - postgres
-        script:
-          - mvn clean install
-        after-script:
-          # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
-          - pipe: atlassian/checkstyle-report:0.3.0
+          - cd ../
+          - mvn test
     - step:
         name: Security Scan
         caches:
