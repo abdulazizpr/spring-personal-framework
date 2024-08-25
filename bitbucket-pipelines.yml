@@ -43,7 +43,7 @@ pipelines:
         services:
           - postgres
         script:
-          - psql -U postgres -c "DROP DATABASE IF EXISTS chart_tick;"
+          - psql -h localhost -U postgres -c "DROP DATABASE IF EXISTS chart_tick;"
 
 definitions:
   caches:
