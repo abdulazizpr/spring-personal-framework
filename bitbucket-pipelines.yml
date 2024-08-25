@@ -12,15 +12,6 @@ pipelines:
           # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
           - pipe: atlassian/checkstyle-report:0.3.0
     - step:
-        name: Install Entity and Repository
-        caches:
-          - maven
-        script:
-          - cd ../springboot-personal-entity
-          - mvn clean install
-          - cd ../springboot-personal-repository
-          - mvn clean install
-    - step:
         name: Data Migration
         caches:
           - maven
@@ -28,7 +19,6 @@ pipelines:
           - postgres
         script:
           - cd springboot-personal-migration/
-          - mvn clean install
           - mvn flyway:migrate -P flyway
     - step:
         name: Unit Test/Integration Test
