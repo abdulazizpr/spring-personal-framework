@@ -20,7 +20,7 @@ pipelines:
           script:
             - cd springboot-personal-migration/
             - mvn clean install
-            - mvn flyway:migrate
+            - mvn flyway:migrate -P flyway
       - step:
           name: Unit Test/Integration Test
           caches:
