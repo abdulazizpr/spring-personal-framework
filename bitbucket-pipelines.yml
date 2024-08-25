@@ -24,7 +24,7 @@ pipelines:
         services:
           - postgres
         script:
-          - mvn test -Dspring.profiles.active=test
+          - mvn test -Ptest
         artifacts:
           - target/**
 
