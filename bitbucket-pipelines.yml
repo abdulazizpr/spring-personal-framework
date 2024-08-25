@@ -18,7 +18,9 @@ pipelines:
           services:
             - postgres
           script:
+            - mvn install -DskipTests
             - cd springboot-personal-migration/
+            - mvn install -DskipTests
             - mvn flyway:migrate -P flyway
       - step:
           name: Unit Test/Integration Test
