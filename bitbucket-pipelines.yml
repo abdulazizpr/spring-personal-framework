@@ -12,7 +12,6 @@ pipelines:
           - mvn clean install -DskipTests
           - cd springboot-personal-migration/
           - mvn flyway:migrate -P flyway
-          - mvn spring-boot:run
         after-script:
           # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
           - pipe: atlassian/checkstyle-report:0.3.0
@@ -38,7 +37,7 @@ pipelines:
           # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
           - pipe: atlassian/git-secrets-scan:0.5.1
     - step:
-        name: Drop All Databases
+        name: Drop All Database After Scanning and Testing
         image: postgres:13
         services:
           - postgres
