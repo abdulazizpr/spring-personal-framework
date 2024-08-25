@@ -3,7 +3,7 @@ image: maven:3.8.1-openjdk-17
 pipelines:
   default:
     - step:
-        name: Build Dependencies and Integration Testing
+        name: Build and Cache Artifacts
         caches:
           - maven
         services:
@@ -13,16 +13,32 @@ pipelines:
           - cd springboot-personal-migration/
           - mvn flyway:migrate -P flyway
           - cd ../
-          - mvn test
+          - mvn package -DskipTests
+        artifacts:
+          - target/**
+
     - step:
-          name: Sonar Analysis
-          caches:
-            - maven
-          services:
-            - postgres
-          script:
-            - mvn clean install -DskipTests
-            - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=spring-personal-framework_spring-personal-framework
+        name: Integration Testing
+        caches:
+          - maven
+        services:
+          - postgres
+        script:
+          - mvn test
+        artifacts:
+          - target/**
+
+    - step:
+        name: Sonar Analysis
+        caches:
+          - maven
+        services:
+          - postgres
+        script:
+          - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=spring-personal-framework_spring-personal-framework
+        artifacts:
+          - target/**
+
     - step:
         name: Security Scan
         caches:
@@ -31,6 +47,7 @@ pipelines:
           # Run a security scan for sensitive data.
           # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
           - pipe: atlassian/git-secrets-scan:0.5.1
+
     - step:
         name: Drop All Database After Scanning and Testing
         image: postgres:13
