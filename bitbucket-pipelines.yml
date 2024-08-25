@@ -24,6 +24,7 @@ pipelines:
         services:
           - postgres
         script:
+          - mvn clean install -DskipTests
           - cd springboot-personal-migration/
           - mvn flyway:migrate -P flyway
           - cd ../
