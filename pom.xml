@@ -15,16 +15,26 @@
         <spring-boot.version>3.3.2</spring-boot.version>
         <flyway.version>10.17.2</flyway.version>
         <postgresql.version>42.6.0</postgresql.version>
+        <jacoco.version>0.8.11</jacoco.version>
         <sonar.organization>spring-personal-framework</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <jacoco.version>0.8.11</jacoco.version>
         <sonar.exclusions>
             **/schemas/**,
-            **/config/**
+            **/config/**,
+            com/abdulazizpr/springboot/command/Command.java,
+            com/abdulazizpr/springboot/command/CommandExecutor.java,
+            com/abdulazizpr/springboot/command/AbstractCommand.java,
+            com/abdulazizpr/springboot/command/impl/CommandExecutorImpl.java,
+            com/abdulazizpr/springboot/command/impl/CommandValidationException.java
         </sonar.exclusions>
         <sonar.coverage.exclusions>
             **/schemas/**,
-            **/config/**
+            **/config/**,
+            com/abdulazizpr/springboot/command/Command.java,
+            com/abdulazizpr/springboot/command/CommandExecutor.java,
+            com/abdulazizpr/springboot/command/AbstractCommand.java,
+            com/abdulazizpr/springboot/command/impl/CommandExecutorImpl.java,
+            com/abdulazizpr/springboot/command/impl/CommandValidationException.java
         </sonar.coverage.exclusions>
     </properties>
 

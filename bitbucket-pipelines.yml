@@ -44,6 +44,7 @@ pipelines:
           - mvn flyway:migrate -P flyway
           - cd ../
           - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=spring-personal-framework_spring-personal-framework
+          - mvn jacoco:report
         artifacts:
           - target/**
 
