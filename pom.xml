@@ -15,6 +15,8 @@
         <spring-boot.version>3.3.2</spring-boot.version>
         <flyway.version>10.17.2</flyway.version>
         <postgresql.version>42.6.0</postgresql.version>
+        <sonar.organization>spring-personal-framework</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <modules>

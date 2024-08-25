@@ -3,7 +3,7 @@ image: maven:3.8.1-openjdk-17
 pipelines:
   default:
     - step:
-        name: Build Dependencies and Migrate Database
+        name: Build Dependencies and Integration Testing
         caches:
           - maven
         services:
@@ -15,11 +15,17 @@ pipelines:
           - cd ../
           - mvn test
     - step:
+          name: Sonar Analysis
+          caches:
+            - maven
+          services:
+            - postgres
+          script:
+            - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=spring-personal-framework_spring-personal-framework
+    - step:
         name: Security Scan
         caches:
           - maven
-        services:
-          - postgres
         script:
           # Run a security scan for sensitive data.
           # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
