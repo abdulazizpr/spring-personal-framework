@@ -13,9 +13,18 @@
 
     <properties>
         <java.version>17</java.version>
-        <flyway.version>9.7.0</flyway.version>
+        <flyway.version>9.22.3</flyway.version>
         <r2dbc-postgresql.version>0.8.8.RELEASE</r2dbc-postgresql.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>flyway</id>
+            <properties>
+                <spring.config.location>classpath:/application-flyway.properties</spring.config.location>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
