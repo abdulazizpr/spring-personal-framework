@@ -2,49 +2,57 @@ image: maven:3.8.1-openjdk-17
 
 pipelines:
   default:
-      - step:
-          name: Build Dependencies
-          caches:
-            - maven
-          script:
-            - mvn clean install
-          after-script:
-            # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
-            - pipe: atlassian/checkstyle-report:0.3.0
-      - step:
-          name: Data Migration
-          caches:
-            - maven
-          services:
-            - postgres
-          script:
-            - mvn install -DskipTests
-            - cd springboot-personal-migration/
-            - mvn install -DskipTests
-            - mvn flyway:migrate -P flyway
-      - step:
-          name: Unit Test/Integration Test
-          caches:
-            - maven
-          services:
-            - postgres
-          script:
-            - mvn test
-          after-script:
-            # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
-            - pipe: atlassian/checkstyle-report:0.3.0
-      - step:
-          name: Security Scan
-          script:
-            # Run a security scan for sensitive data.
-            # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
-            - pipe: atlassian/git-secrets-scan:0.5.1
-      - step:
-          name: Drop All Databases
-          services:
-            - postgres
-          script:
-            - psql -U postgres -c "DROP DATABASE IF EXISTS chart_tick;"
+    - step:
+        name: Build Dependencies
+        caches:
+          - maven
+        script:
+          - mvn clean install
+        after-script:
+          # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
+          - pipe: atlassian/checkstyle-report:0.3.0
+    - step:
+        name: Install Entity and Repository
+        caches:
+          - maven
+        script:
+          - cd ../springboot-personal-entity
+          - mvn clean install
+          - cd ../springboot-personal-repository
+          - mvn clean install
+    - step:
+        name: Data Migration
+        caches:
+          - maven
+        services:
+          - postgres
+        script:
+          - cd springboot-personal-migration/
+          - mvn clean install
+          - mvn flyway:migrate -P flyway
+    - step:
+        name: Unit Test/Integration Test
+        caches:
+          - maven
+        services:
+          - postgres
+        script:
+          - mvn test
+        after-script:
+          # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
+          - pipe: atlassian/checkstyle-report:0.3.0
+    - step:
+        name: Security Scan
+        script:
+          # Run a security scan for sensitive data.
+          # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
+          - pipe: atlassian/git-secrets-scan:0.5.1
+    - step:
+        name: Drop All Databases
+        services:
+          - postgres
+        script:
+          - psql -U postgres -c "DROP DATABASE IF EXISTS chart_tick;"
 
 definitions:
   services:
