@@ -12,20 +12,12 @@ pipelines:
           # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
           - pipe: atlassian/checkstyle-report:0.3.0
     - step:
-        name: Cache Maven Repository
-        caches:
-          - maven
-        script:
-          - mkdir -p /opt/atlassian/pipelines/agent/build/.m2/repository
-          - cp -r ~/.m2/repository /opt/atlassian/pipelines/agent/build/.m2/
-    - step:
         name: Data Migration
         caches:
           - maven
         services:
           - postgres
         script:
-          - cp -r /opt/atlassian/pipelines/agent/build/.m2/repository ~/.m2/
           - cd springboot-personal-migration/
           - mvn flyway:migrate -P flyway
     - step:
@@ -35,15 +27,15 @@ pipelines:
         services:
           - postgres
         script:
-          - cp -r /opt/atlassian/pipelines/agent/build/.m2/repository ~/.m2/
           - mvn test
         after-script:
           # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
           - pipe: atlassian/checkstyle-report:0.3.0
     - step:
         name: Security Scan
+        caches:
+          - maven
         script:
-          - cp -r /opt/atlassian/pipelines/agent/build/.m2/repository ~/.m2/
           # Run a security scan for sensitive data.
           # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
           - pipe: atlassian/git-secrets-scan:0.5.1
