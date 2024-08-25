@@ -21,6 +21,7 @@ pipelines:
           services:
             - postgres
           script:
+            - mvn clean install
             - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=spring-personal-framework_spring-personal-framework
     - step:
         name: Security Scan
