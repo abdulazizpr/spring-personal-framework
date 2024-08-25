@@ -12,14 +12,12 @@ pipelines:
           # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
           - pipe: atlassian/checkstyle-report:0.3.0
     - step:
-        name: Install Entity and Repository
+        name: Cache Maven Repository
         caches:
           - maven
         script:
-          - cd ../springboot-personal-entity
-          - mvn clean install
-          - cd ../springboot-personal-repository
-          - mvn clean install
+          - mkdir -p /opt/atlassian/pipelines/agent/build/.m2/repository
+          - cp -r ~/.m2/repository /opt/atlassian/pipelines/agent/build/.m2/
     - step:
         name: Data Migration
         caches:
@@ -27,8 +25,8 @@ pipelines:
         services:
           - postgres
         script:
+          - cp -r /opt/atlassian/pipelines/agent/build/.m2/repository ~/.m2/
           - cd springboot-personal-migration/
-          - mvn clean install
           - mvn flyway:migrate -P flyway
     - step:
         name: Unit Test/Integration Test
@@ -37,6 +35,7 @@ pipelines:
         services:
           - postgres
         script:
+          - cp -r /opt/atlassian/pipelines/agent/build/.m2/repository ~/.m2/
           - mvn test
         after-script:
           # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
@@ -44,6 +43,7 @@ pipelines:
     - step:
         name: Security Scan
         script:
+          - cp -r /opt/atlassian/pipelines/agent/build/.m2/repository ~/.m2/
           # Run a security scan for sensitive data.
           # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
           - pipe: atlassian/git-secrets-scan:0.5.1
@@ -55,6 +55,9 @@ pipelines:
           - psql -U postgres -c "DROP DATABASE IF EXISTS chart_tick;"
 
 definitions:
+  caches:
+    maven: ~/.m2/repository
+
   services:
     postgres:
       image: postgres:13
