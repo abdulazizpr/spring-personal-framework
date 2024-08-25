@@ -16,13 +16,13 @@ pipelines:
           # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
           - pipe: atlassian/checkstyle-report:0.3.0
     - step:
-        name: Unit Test/Integration Test
+        name: Unit/Integration Testing
         caches:
           - maven
         services:
           - postgres
         script:
-          - mvn test
+          - mvn clean install
         after-script:
           # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
           - pipe: atlassian/checkstyle-report:0.3.0
