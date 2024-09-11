@@ -10,6 +10,16 @@
 * Project Reactor
 * Spring Reactive Programming
 
+## How To Develop It
+- Create Data Migration
+- Create Repository
+- Create Command Pattern
+- Create Controller
+- Create Integration Testing
+
+## Recommendation Tools
+- IntelliJ IDEA Community Version
+
 ## How to run the project
 
 1. Clone the repository
