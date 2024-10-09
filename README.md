@@ -53,7 +53,7 @@ mvn test
 ```
 
 ## API Documentation
-After running the application, you can access the API documentation on [(http://localhost:8080/swagger-ui.html)]http://localhost:8080/swagger-ui.html
+After running the application, you can access the API documentation on [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
 ## How to clean the project
 ```shell
